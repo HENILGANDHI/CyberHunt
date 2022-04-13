@@ -5,7 +5,7 @@
 1) git clone https://github.com/HENILGANDHI/CyberHunt.git
 2) cd CyberHunt/
 3) chmod 777 installer.sh
-4) chmod 777 
+4) chmod 777 cyberhunt.sh
 5) bash installer.sh
 6) bash cyberhunt.sh
 
