@@ -11,6 +11,6 @@
 
 If any error occur's Contact me:
 
-Email   : hsghenil@gmail.com
-Linkedin: <https://www.linkedin.com/in/henil-gandhi-102957218/>
+Email   : hsghenil@gmail.com        
+Linkedin: <https://www.linkedin.com/in/henil-gandhi-102957218/>      
 Twitter : <https://twitter.com/fantasticHENIL> 
