@@ -13,3 +13,5 @@ cp waybackurls/usr/bin
 cp gf/usr/bin
 cp airixss/usr/bin
 cp qsreplace/usr/bin
+
+echo "Installation completed!"
