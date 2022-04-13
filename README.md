@@ -1,6 +1,6 @@
 # CyberHunt
 
-##Installing Steps:
+## STEPS TO RUN:
 
 1) git clone https://github.com/HENILGANDHI/CyberHunt.git
 2) bash installer.sh
