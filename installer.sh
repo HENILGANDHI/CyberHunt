@@ -1,6 +1,6 @@
 echo "Installing language and command for cyber hunt tool."
-sudo su
-apt-get install golang-go
+
+sudo apt-get install golang-go
 go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 go install github.com/tomnomnom/waybackurls@latest
