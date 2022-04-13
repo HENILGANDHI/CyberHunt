@@ -16,6 +16,8 @@ Then it will check if their had any Reflected-XSS Vulnerability then it will giv
 5) bash installer.sh
 6) bash cyberhunt.sh
 
+After completing Recon , check the folder named of domain name and you will get all information in that folder.
+
 If any error occur's Contact me:
 
 Email   : hsghenil@gmail.com        
