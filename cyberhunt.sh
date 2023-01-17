@@ -51,7 +51,7 @@ echo "$blue   3.Open-Redirect 4.idor  "
 echo "$blue   5.lfi           6. sqli "
 echo "$blue   7.all above 6           "
 echo "$cyan ----------------------------------------"
-echo "$red Enter Number besides of vulnerability for specific urls."
+echo "$red //  Enter Number besides of vulnerability for specific urls.  //"
 read type
 #XSS
 if [ $type = 1 ];
@@ -123,13 +123,13 @@ then
    cat urls.txt | gf sqli > shortenurls_for_Sqli.txt
    echo "$yellow Done for Sqli !"
 fi
-echo -e "\n $cyan Congrats, All Done !"
+echo -e "\n $cyan ##  Congrats, All Done !  ##"
 
 #Reflected XSS
-echo "$blue Here, we are looking Reflected XSS Bug through my own custom payload."
+echo "$blue //  Here, we are looking Reflected XSS Bug through my own custom payload.  //"
 echo -e "\n"
 cat shortenurls_for_XSS.txt | qsreplace "&gt;&lt;svg onload=confirm(1)&gt;" | airixss -payload "confirm(1)" > Reflected_XSS.txt
 
-echo -e "$yellow Check reflected_XSS.txt file.\nIf any page of $domain is vulnerable to reflected XSS it will show in text file."
+echo -e "$yellow //  Check reflected_XSS.txt file.\nIf any page of $domain is vulnerable to reflected XSS it will show in text file.  //"
 
  
