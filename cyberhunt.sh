@@ -6,17 +6,17 @@ cyan=$'\e[1;36m'
 white=$'\e[1;37m'
 
 
-echo "$cyan 	 .d8888b.           888                            888    888                   888    "
-echo "$cyan 	d88P  Y88b          888                            888    888                   888    "
-echo "$cyan 	888    888          888                            888    888                   888    "
-echo "$meg	888        888  888 88888b.   .d88b.  888d888      8888888888 888  888 88888b.  888888 "
-echo "$meg	888        888  888 888  88b d8P  Y8b 888P         888    888 888  888 888  88b 888    "
-echo "$meg	888    888 888  888 888  888 88888888 888          888    888 888  888 888  888 888    "
-echo "$meg	Y88b  d88P Y88b 888 888 d88P Y8b.     888          888    888 Y88b 888 888  888 Y88b.  "
-echo "$cyan	  Y8888P     Y88888 88888P     Y8888  888          888    888   Y88888 888  888   Y888 "
-echo "$cyan 			888                                                                    "
-echo "$cyan 		   Y8b d88P                                                                    "
-echo "$cyan 		     Y88P                                                                      "
+echo "$cyan      .d8888b.           888                            888    888                   888    "
+echo "$cyan     d88P  Y88b          888                            888    888                   888    "
+echo "$cyan     888    888          888                            888    888                   888    "
+echo "$meg      888        888  888 88888b.   .d88b.  888d888      8888888888 888  888 88888b.  888888 "
+echo "$meg      888        888  888 888  88b d8P  Y8b 888P         888    888 888  888 888  88b 888    "
+echo "$meg      888    888 888  888 888  888 88888888 888          888    888 888  888 888  888 888    "
+echo "$meg      Y88b  d88P Y88b 888 888 d88P Y8b.     888          888    888 Y88b 888 888  888 Y88b.  "
+echo "$cyan       Y8888P     Y88888 88888P     Y8888  888          888    888   Y88888 888  888   Y888 "
+echo "$cyan                     888                                                                    "
+echo "$cyan                Y8b d88P                                                                    "
+echo "$cyan                  Y88P                                                                      "
 
 echo -e "\n"
 echo "$white Created By: HENIL SANJAYKUMAR GANDHI"
@@ -25,18 +25,25 @@ echo "$white Instagram : https://www.instagram.com/fantastic_henil/"
 echo "$white Twitter   : https://twitter.com/fantasticHENIL"
 
 echo -e "\n"
-echo "$red Enter the Domain name!"
+echo "$red //  Enter the Domain name! //"
+echo -e "$cyan\n"
 read domain
-echo "$blue Getting Subdomains for you, just wait for while !!!"
+echo -e "\n"
+echo "$blue //  Getting Subdomains for you, just wait for while !!!  //"
+echo -e "\n"
 mkdir $domain
-touch subdomain.txt
-subfinder -silent -d $domain | httpx -silent -mc 200,301,302,303 > $domain/subdomain.txt
-echo "$yellow Subdomain finding is Done"
-
-echo -e "$blue Waybackurl finding....\n it may take time, so chill!!!"
 cd $domain
+
+subfinder -silent -d $domain | httpx -silent > subdomain.txt
+echo "$yellow //  Subdomain finding is Done  //"
+
+echo -e "\n"
+echo -e "$blue //  Waybackurl finding....  //"
+echo -e "\n"
+echo -e "$blue //  It may take time, so chill!!!  //"
 #touch urls.txt
 cat subdomain.txt | waybackurls > urls.txt
+
 echo "$red for Which vulnerability you want shortlisted url?"
 echo "$cyan ----------------------------------------"
 echo "$blue   1.xss           2. ssrf "
@@ -124,4 +131,5 @@ echo -e "\n"
 cat shortenurls_for_XSS.txt | qsreplace "&gt;&lt;svg onload=confirm(1)&gt;" | airixss -payload "confirm(1)" > Reflected_XSS.txt
 
 echo -e "$yellow Check reflected_XSS.txt file.\nIf any page of $domain is vulnerable to reflected XSS it will show in text file."
+
  
