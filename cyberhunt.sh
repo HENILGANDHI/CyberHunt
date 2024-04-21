@@ -1,135 +1,173 @@
+#!/bin/bash
+
 red=$'\e[1;31m'
 blue=$'\e[1;34m'
 yellow=$'\e[1;33m'
+green=$'\e[1;32m'
 meg=$'\e[1;35m'
 cyan=$'\e[1;36m'
 white=$'\e[1;37m'
 
+banner () {
+    printf "${green}
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   ░░
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒
+▒▒▒▒    ▒   ▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒  ▒    ▒   ▒▒▒▒▒▒   ▒▒   ▒   ▒   ▒▒▒    ▒  
+▓▓   ▓▓▓▓▓   ▓   ▓▓   ▓   ▓▓▓▓  ▓▓▓   ▓▓▓   ▓▓▓▓     ▓▓▓▓   ▓▓   ▓▓   ▓▓   ▓▓▓   ▓▓
+▓   ▓▓▓▓▓▓▓▓    ▓▓▓   ▓▓▓   ▓         ▓▓▓   ▓▓▓▓   ▓▓  ▓▓   ▓▓   ▓▓   ▓▓   ▓▓▓   ▓▓
+▓▓   ▓▓▓▓▓▓▓▓   ▓▓▓   ▓▓▓   ▓  ▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓  ▓▓▓   ▓   ▓▓   ▓▓   ▓▓   ▓▓▓   ▓ 
+████    ████   ████   █   █████     ████    ████  ███   ███      █    ██   ████   █
+███████████   █████████████████████████████████████████████████████████████████████
+                            
+                            
+    ${white}"
 
-echo "$cyan      .d8888b.           888                            888    888                   888    "
-echo "$cyan     d88P  Y88b          888                            888    888                   888    "
-echo "$cyan     888    888          888                            888    888                   888    "
-echo "$meg      888        888  888 88888b.   .d88b.  888d888      8888888888 888  888 88888b.  888888 "
-echo "$meg      888        888  888 888  88b d8P  Y8b 888P         888    888 888  888 888  88b 888    "
-echo "$meg      888    888 888  888 888  888 88888888 888          888    888 888  888 888  888 888    "
-echo "$meg      Y88b  d88P Y88b 888 888 d88P Y8b.     888          888    888 Y88b 888 888  888 Y88b.  "
-echo "$cyan       Y8888P     Y88888 88888P     Y8888  888          888    888   Y88888 888  888   Y888 "
-echo "$cyan                     888                                                                    "
-echo "$cyan                Y8b d88P                                                                    "
-echo "$cyan                  Y88P                                                                      "
+    printf "${cyan}
+                                        <❤> Made By HENIL GANDHI <❤>
+    ${white}"
 
-echo -e "\n"
-echo "$white Created By: HENIL SANJAYKUMAR GANDHI"
-echo "$white Linkedin  : https://www.linkedin.com/in/henil-gandhi-102957218/"
-echo "$white Instagram : https://www.instagram.com/fantastic_henil/"
-echo "$white Twitter   : https://twitter.com/fantasticHENIL"
+    printf "${meg}
+Linkedin :-  https://linkedin.com/in/henil-gandhi-102957218/
+Instagram :- https://www.instagram.com/fantastic_henil
+Twitter :-   https://twitter.com/fantasticHENIL
 
+${white}"
 echo -e "\n"
-echo "$red //  Enter the Domain name! //"
-echo -e "$cyan\n"
-read domain
-echo -e "\n"
-echo "$blue //  Getting Subdomains for you, just wait for while !!!  //"
-echo -e "\n"
-mkdir $domain
-cd $domain
+}
 
-subfinder -silent -d $domain | httpx -silent > subdomain.txt
-echo "$yellow //  Subdomain finding is Done  //"
+# Function to display usage information
+usage() {
+    banner
+    echo "${white}Usage: $0 -d <target>"
+    echo "${white}Options:"
+    echo "${blue}  -d, --domain <target>   Target domain name"
+    echo "${white}===============================================================================${white}"
+    echo "${green} Enumeration Mode: ${yellow}It will complete the Reconnaissance on the given target domain${white}"
+    echo "${green} Exploitation Mode: ${yellow}It will complete the Reconnaissance & Automation Vulnerability scan on the given target domain${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"   
+    echo "${meg} Example"
+    echo "${cyan} cyberhunt -d target.com"
+    exit 1
+}
 
-echo -e "\n"
-echo -e "$blue //  Waybackurl finding....  //"
-echo -e "\n"
-echo -e "$blue //  It may take time, so chill!!!  //"
-#touch urls.txt
-cat subdomain.txt | waybackurls > urls.txt
+# Function to perform subdomain enumeration
+subdomain_enum() {
+    echo "${white}===============================================================================${white}"
+    echo "${meg}Subdomain enumeration started on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+    
+    # Create folder for target
+    mkdir -p "$1"
+    cd "$1" || exit
 
-echo "$red for Which vulnerability you want shortlisted url?"
-echo "$cyan ----------------------------------------"
-echo "$blue   1.xss           2. ssrf "
-echo "$blue   3.Open-Redirect 4.idor  "
-echo "$blue   5.lfi           6. sqli "
-echo "$blue   7.all above 6           "
-echo "$cyan ----------------------------------------"
-echo "$red //  Enter Number besides of vulnerability for specific urls.  //"
-read type
-#XSS
-if [ $type = 1 ];
-then
-   echo "$blue We are fetching shorten URL's for XSS vulnerability!!."
-   cat urls.txt | gf xss > shortenurls_for_XSS.txt
-   echo "$yellow Done for XSS!"
+    # Run subfinder and findomain
+    subfinder -d "$1" -silent | tee subfinder.txt
+    findomain -t "$1" -silent | tee findomain.txt
+
+
+    # Merge and sort subdomain lists
+    cat subfinder.txt findomain.txt | sort -u > all_subdomains.txt
+
+    echo "${white}===============================================================================${white}"
+    echo "${meg}Subdomain enumeration completed on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+}
+
+# Function to perform httpx scanning
+httpx_scan() {
+    echo "${white}===============================================================================${white}"
+    echo "${meg}Httpx started on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+
+    # Run httpx
+    httpx -l all_subdomains.txt -silent -o running_urls.txt
+
+    echo "${white}===============================================================================${white}"
+    echo "${meg}Httpx completed on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+}
+
+# Function to perform waybackurls scanning
+wayback_scan() {
+    echo "${white}===============================================================================${white}"
+    echo "${meg}WaybackURLs started on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+
+    # Run waybackurls
+    waybackurls < running_urls.txt > wayback.txt
+
+    echo "${white}===============================================================================${white}"
+    echo "${meg}WaybackURLs completed on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+}
+
+# Function to perform nuclei scanning
+nuclei_scan() {
+    echo "${white}===============================================================================${white}"
+    echo "${meg}Nuclei scanning started on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+    
+    # Run nuclei with notification
+    nuclei -l running_urls.txt -t /root/nuclei-templates -stats -o "nuclei_out_for_$1.txt" -silent | notify
+
+    echo "${white}===============================================================================${white}"
+    echo "${meg}Nuclei scanning completed on ${blue}$1${white}"
+    echo "${white}===============================================================================${white}"
+    echo -e "\n"
+}
+
+# Main script logic
+if [ "$#" -ne 2 ]; then
+    usage
 fi
 
-#SSRF
-if [ $type = 2 ];
-then
-   echo "$blue We are fetching shorten URL's for SSRF vulnerability!!."
-   cat urls.txt | gf SSRF > shortenurls_for_SSRF.txt
-   echo "$yellow Done for SSRF!"
+# Parse command line options
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -d|--domain) domain="$2"; shift ;;
+        *) echo "${red}Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# Check if target domain is provided
+if [ -z "$domain" ]; then
+    echo "${red}Target domain is missing!"
+    usage
 fi
 
-#OPEN-REDIRECT
-if [ $type = 3 ];
-then
-   echo "$blue We are fetching shorten URL's for Open-Redirect vulnerability!!."
-   cat urls.txt | gf redirect > shortenurls_for_Open-Redirect.txt
-   echo "$yellow Done for Open-Redirect!"
-fi
+banner
 
-#idor
-if [ $type = 4 ];
-then
-   echo "$blue We are fetching shorten URL's for idor vulnerability!!."
-   cat urls.txt | gf idor > shortenurls_for_Idor.txt
-   echo "$yellow Done for Idor!"
-fi
+# Prompt user for mode selection
+echo "${yellow}Choose mode:"
+echo "${yellow}1. Enumeration mode"
+echo "${yellow}2. Exploitation mode"
+read -r mode
 
-#lfi
-if [ $type = 5 ];
-then
-   echo "$blue We are fetching shorten URL's for lfi vulnerability!!."
-   cat urls.txt | gf lfi > shortenurls_for_lfi.txt
-   echo "$yellow Done for lfi !"
-fi
-
-#sqli
-if [ $type = 6 ];
-then
-   echo "$blue We are fetching shorten URL's for Sqli vulnerability!!."
-   cat urls.txt | gf sqli > shortenurls_for_Sqli.txt
-   echo "$yellow Done for sqli !"
-fi
-
-if [ $type = 7 ];
-then
-   echo "$red Woww, fetching shorten urls for all vulnerabilities!"
-   echo "$blue It may take some time!!"
-   cat urls.txt | gf xss > shortenurls_for_XSS.txt
-   echo "$yellow Done for XSS!"
-   echo "$cyan ----------------------------------"
-   cat urls.txt | gf SSRF > shortenurls_for_SSRF.txt
-   echo "$yellow Done for SSRF!"
-   echo "$cyan ----------------------------------"
-   cat urls.txt | gf redirect > shortenurls_for_Open-Redirect.txt
-   echo "$yellow Done for Open-Redirect!"
-   echo "$cyan ----------------------------------"
-   cat urls.txt | gf idor > shortenurls_for_Idor.txt
-   echo "$yellow Done for idor!"
-   echo "$cyan ----------------------------------"
-   cat urls.txt | gf lfi > shortenurls_for_lfi.txt
-   echo "$yellow Done for lfi !"
-   echo "$cyan ----------------------------------"
-   cat urls.txt | gf sqli > shortenurls_for_Sqli.txt
-   echo "$yellow Done for Sqli !"
-fi
-echo -e "\n $cyan ##  Congrats, All Done !  ##"
-
-#Reflected XSS
-echo "$blue //  Here, we are looking Reflected XSS Bug through my own custom payload.  //"
-echo -e "\n"
-cat shortenurls_for_XSS.txt | qsreplace "&gt;&lt;svg onload=confirm(1)&gt;" | airixss -payload "confirm(1)" > Reflected_XSS.txt
-
-echo -e "$yellow //  Check reflected_XSS.txt file.\nIf any page of $domain is vulnerable to reflected XSS it will show in text file.  //"
-
- 
+# Perform tasks based on selected mode
+case $mode in
+    1)
+        subdomain_enum "$domain"
+        httpx_scan "$domain"
+        wayback_scan "$domain"
+        ;;
+    2)
+        subdomain_enum "$domain"
+        httpx_scan "$domain"
+        wayback_scan "$domain"
+        nuclei_scan "$domain"
+        ;;
+    *)
+        echo "${red}Invalid mode selected!"
+        usage
+        ;;
+esac
